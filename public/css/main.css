@@ -1,0 +1,13 @@
+.err-response{
+    color: #a10b0b;
+}
+input.error{
+    color: #a10b0b;
+    border-color: #a10b0b;
+}
+.error{
+    color: #a10b0b;
+}
+.float-right{
+    float: right !important;
+}
