@@ -7,6 +7,8 @@ Route::group( array( 'middleware' => ['web'], 'namespace' => 'App\Modules\Admin\
     Route::group( array('middleware' => ['admin'] ), function() {
         Route::get('/', array('uses' => 'DashboardController@dashboard'));
         //Route::resource('account', 'AccountController');
-        Route::get('/account/lists', array('uses' => 'AccountController@lists'));
+        //: Account
+        Route::get('/account/index', array('uses' => 'AccountController@index'));
+        Route::get('/account/getList', array('uses' => 'AccountController@getList'));
     });
 });

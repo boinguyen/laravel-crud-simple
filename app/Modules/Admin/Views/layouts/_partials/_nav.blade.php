@@ -191,10 +191,10 @@
                     <a href="{{ URL::to('/admin/user') }}"><i class="fa fa-bar-chart-o fa-fw"></i> User<span class="fa arrow"></span></a>
                     <ul class="nav nav-second-level">
                         <li>
-                            <a href="{{ URL::to('/admin/user') }}">Create</a>
+                            <a href="{{ URL::to('/admin/account') }}">Create</a>
                         </li>
                         <li>
-                            <a href="{{ URL::to('/admin/user/list') }}">List</a>
+                            <a href="{{ URL::to('/admin/account/index') }}">List</a>
                         </li>
                     </ul>
                     <!-- /.nav-second-level -->
