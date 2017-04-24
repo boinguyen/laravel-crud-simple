@@ -16,12 +16,22 @@ class AccountController extends Controller{
         $this->account = $account;
     }
 
-    public function lists(){
-        $account_list = User::all();
-        echo "<pre>";
-        print_r($account_list);
-        echo "</pre>";
-        exit;
+    public function index(){
+        return view('Admin::account.lists');
+    }
+
+    public function getList(){
+        $cols = array(
+            'id',
+            'email',
+            'CONCAT(f_name, " ", l_name) as full_name',
+            'role',
+            'status'
+        );
+        $lists = User::all();
+
+        return \Datatables::of($lists)
+            ->make();
     }
 
 

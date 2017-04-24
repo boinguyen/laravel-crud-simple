@@ -16,6 +16,9 @@
 
         <link rel="stylesheet" href="{{ asset('bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.min.css') }}" />
 
+        <!-- Datatable -->
+        <link rel="stylesheet" href="{{ asset('DataTables/media/css/dataTables.bootstrap.min.css') }}" />
+
         <script src="{{ asset('js/jquery-2.1.1.js') }}"></script>
         <script src="{{ asset('jquery-validation/dist/jquery.validate.min.js') }}"></script>
 
@@ -43,6 +46,10 @@
 
         <script src="{{ asset('js/moment.js') }}"></script>
         <script src="{{ asset('bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js') }}"></script>
+
+        <!-- Datatable -->
+        <script src="{{ asset('DataTables/media/js/jquery.dataTables.min.js') }}"></script>
+        <script src="{{ asset('DataTables/media/js/dataTables.bootstrap.min.js') }}"></script>
 
         @stack('scripts')
     </body>
