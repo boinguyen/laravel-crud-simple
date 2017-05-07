@@ -43,14 +43,14 @@ class AccountRepository extends RepositoryAbstract{
                     $result = array(
                         'success' => true,
                         'message' => 'Register successfully',
-                        'result' => $userM
+                        'data' => $userM
                     );
                 }
                 else{
                     $result = array(
                         'success' => false,
                         'message' => 'Error',
-                        'result' => null
+                        'data' => null
                     );
                 }
             }
@@ -58,7 +58,7 @@ class AccountRepository extends RepositoryAbstract{
                 $result = array(
                     'success' => false,
                     'message' => 'Error',
-                    'result' => $valid
+                    'data' => $valid
                 );
             }
 
@@ -135,20 +135,19 @@ class AccountRepository extends RepositoryAbstract{
                 $result = array(
                     'success' => true,
                     'message' => 'Login successfully',
-                    'result' => \Auth::user()
+                    'data' => \Auth::user()
                 );
             }
             else{
                 $result = array(
                     'success' => false,
                     'message' => 'Login fail',
-                    'result' => null
+                    'data' => null
                 );
             }
         } catch(Exception $ex) {
             \Log::error($ex->getMessage());
         }
-
 
         return $result;
 
@@ -160,7 +159,7 @@ class AccountRepository extends RepositoryAbstract{
         return array(
             'success' => true,
             'message' => 'Logout successfully!',
-            'result' => null
+            'data' => null
         );
     }
 

@@ -11,3 +11,6 @@ input.error{
 .float-right{
     float: right !important;
 }
+.alert.alert-message{
+    margin-top: 10px;
+}

@@ -51,4 +51,9 @@ class User extends Authenticatable
         return $this->role ==='admin' ? true : false; // this looks for an admin column in your users table
     }
 
+    public function isUser()
+    {
+        return $this->role ==='user' ? true : false; // this looks for an admin column in your users table
+    }
+
 }

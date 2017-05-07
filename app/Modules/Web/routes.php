@@ -9,7 +9,7 @@ Route::group(['middleware' => ['web'], 'namespace' => 'App\Modules\Web\Controlle
     Route::post('/login', array('uses' => 'UserController@loginPost'));
 
     //: Auth
-    Route::group( array('middleware' => array('auth'), 'prefix' => 'account' ), function() {
+    Route::group( array('middleware' => array('user'), 'prefix' => 'account' ), function() {
         Route::resource('account', 'AccountController');
 
         //: Profile
@@ -24,17 +24,3 @@ Route::group(['middleware' => ['web'], 'namespace' => 'App\Modules\Web\Controlle
     });
 
 });
-
-/*Route::group( array('middleware' => array('web', 'auth'), 'namespace' => 'App\Modules\Web\Controllers', 'module' => 'Web', 'prefix' => 'account' ), function() {
-    Route::resource('account', 'AccountController');
-
-    Route::get('/', array('uses' => 'AccountController@dashboard'));
-    Route::get('/dashboard', array('uses' => 'AccountController@dashboard'));
-    Route::get('/profile', array('uses' => 'AccountController@profile'));
-    Route::get('/profile/update', array('uses' => 'AccountController@profileUpdate'));
-    Route::post('/profile/update', array('uses' => 'AccountController@profileUpdatePost'));
-
-    //: Logout
-    Route::get('/logout', array('uses' => 'AccountController@logout'));
-});
-*/
