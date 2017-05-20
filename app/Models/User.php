@@ -8,8 +8,11 @@ class User extends Authenticatable
 {
     protected $table = 'users';
 
+    public static $role_admin = 'admin';
     public static $role_user = 'user';
     public static $status_waiting = 'waiting';
+    public static $status_active = 'active';
+    public static $status_block= 'block';
 
     /**
      * The attributes that are mass assignable.
@@ -17,7 +20,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'email', 'password'
+        'email', 'password', 'f_name', 'l_name', 'role', 'status'
     ];
 
     /**
