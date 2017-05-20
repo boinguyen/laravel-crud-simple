@@ -70,7 +70,17 @@ class AccountRepository extends RepositoryAbstract{
     }
 
     public function delete($id) {
+        $user = User::find($id);
+        $user->deleted_at = date('Y-m-d H:i:s');
+        $user->save();
 
+        $data = [
+            'success' => true,
+            'message' => 'Delete user successfully',
+            'data' => $user
+        ];
+
+        return $data;
     }
 
     public function find($id, $columns = array()) {
@@ -179,6 +189,7 @@ class AccountRepository extends RepositoryAbstract{
         $users = User::select($cols)
             //->where('id', '<>', \Auth::id())
             //->where('role', '<>', User::$role_admin)
+            ->whereNull('deleted_at')
             ->get();
 
         return $users;

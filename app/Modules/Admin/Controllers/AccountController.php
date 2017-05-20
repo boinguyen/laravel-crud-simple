@@ -55,7 +55,9 @@ class AccountController extends BaseController implements ResourceInterface{
     }
 
     public function destroy($id) {
+        $result = $this->account->delete($id);
 
+        UtilHelper::flashSession($result);
     }
 
 }
