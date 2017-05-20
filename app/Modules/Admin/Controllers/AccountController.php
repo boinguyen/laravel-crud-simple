@@ -2,37 +2,60 @@
 
 namespace App\Modules\Admin\Controllers;
 
-use App\Http\Controllers\Controller;
-//use Illuminate\Http\Request;
-use App\Business\Repository\AccountRepository as Account;
-use Yajra\Datatables\Facades\Datatables;
+use App\Http\Controllers;
+use Illuminate\Http\Request;
+use App\Business\Repository\AccountRepository as AccountRes;
+//use Yajra\Datatables\Facades\Datatables;
 use App\Models\User;
+use App\Http\Controllers\BaseController;
+use App\Business\ResourceInterface;
+use App\Library\UtilHelper;
 
-class AccountController extends Controller{
+class AccountController extends BaseController implements ResourceInterface{
 
     protected $account;
 
-    public function __construct(Account $account) {
-        $this->account = $account;
+    public function __construct(AccountRes $accountRes) {
+        $this->account = $accountRes;
+        //parent::__construct();
     }
 
     public function index(){
-        return view('Admin::account.lists');
+        return view('Admin::account.index');
     }
 
     public function getList(){
-        $cols = array(
-            'id',
-            'email',
-            'CONCAT(f_name, " ", l_name) as full_name',
-            'role',
-            'status'
-        );
-        $lists = User::all();
+        $lists = $this->account->getUserList();
 
         return \Datatables::of($lists)
-            ->make();
+            ->addColumn('actions', 'Admin::account._datatables.actions')
+            ->rawColumns(['actions'])
+            ->make(true);
+
     }
 
+    public function create() {
+
+    }
+
+    public function edit($id) {
+
+    }
+
+    public function show($id) {
+
+    }
+
+    public function store(Request $request) {
+
+    }
+
+    public function update(Request $request, $id) {
+
+    }
+
+    public function destroy($id) {
+
+    }
 
 }

@@ -2,16 +2,16 @@
 
 namespace App\Modules\Web\Controllers;
 
-use App\Modules\Web\Controllers\Controller;
+use App\Http\Controllers;
 use Illuminate\Http\Request;
-use App\Business\Repository\AccountRepository as Acount;
+use App\Business\Repository\AccountRepository as AcountRes;
 
-class AccountController extends Controller {
+class AccountController extends Controllers {
 
-    private $_account;
+    protected $account;
 
-    public function __construct(Acount $account) {
-        $this->_account = $account;
+    public function __construct(AcountRes $accountRes) {
+        $this->account = $accountRes;
     }
 
     /**
@@ -20,7 +20,10 @@ class AccountController extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function index() {
-        //
+        echo "<pre>";
+        print_r(__FUNCTION__);
+        echo "</pre>";
+        exit;
     }
 
     function dashboard(){
@@ -44,7 +47,7 @@ class AccountController extends Controller {
      */
     public function store(Request $request) {
         $input = $request->all();
-        $result = $this->_account->store($input);
+        $result = $this->account->store($input);
 
         if( $result['success'] ){
             return redirect('/login');
@@ -101,20 +104,48 @@ class AccountController extends Controller {
         //
     }
 
+    public function register() {
+        return view('Web::account.register');
+    }
+
+    public function login() {
+        if( \Auth::user() ){
+            return redirect('/account');
+        }
+        return view('Web::account.login');
+    }
+
+    public function loginPost(Request $request){
+        $input = $request->all();
+
+        //: Remember
+        if( array_key_exists('remember', $input) && $input['remember'] ==1 ){
+            $input['remember'] = true;
+        }
+        $auth = $this->account->login($input);
+
+        if( $auth['success'] ){
+            return redirect()->intended('/account');
+        }
+        else{
+            return redirect('/login');
+        }
+    }
+
     public function logout(){
-        $this->_account->logout();
+        $this->account->logout();
 
         return redirect('/');
     }
 
     public function profile(){
-        $user = $this->_account->profile();
+        $user = $this->account->profile();
 
         return view('Web::account.profile', compact('user'));
     }
 
     public function profileUpdate(){
-        $user = $this->_account->profile();
+        $user = $this->account->profile();
 
         return view('Web::account.profile-update', compact('user'));
     }
@@ -122,7 +153,7 @@ class AccountController extends Controller {
     public function profileUpdatePost(Request $request){
         $input = $request->all();
         $id = \Auth::user()->id;
-        $result = $this->_account->update($input, $id);
+        $result = $this->account->update($input, $id);
 
         if( $result['success'] ){
             //: Add flash session

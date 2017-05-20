@@ -32,21 +32,25 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
-    protected $rules = array(
-        'email' => 'required|email|unique:users|min:5|max:50',
-        'password' => 'required|min:3|confirmed',
-        'password_confirmation' => 'required',
-        'f_name' => 'required',
-        'l_name' => 'required',
-    );
+    public function rules($id = null){
+        return array(
+            //'email' => 'required|email|unique:users|min:5|max:50',
+            'email' => 'email|min:5|max:50|unique:users'.($id ? ',id,'.$id : ''),
+            'password' => 'required|min:3|confirmed',
+            'password_confirmation' => 'required',
+            'f_name' => 'required',
+            'l_name' => 'required',
+        );
+
+    }
 
     private $messages = array(
         'f_name.required' => 'The first name field is required.',
         'l_name.required' => 'The last name field is required.'
     );
 
-    public function valid($input = array()){
-        return \Validator::make($input, $this->rules, $this->messages);
+    public function valid($input = array(), $id = null){
+        return \Validator::make($input, $this->rules($id), $this->messages);
     }
 
     public function isAdmin()

@@ -19,6 +19,7 @@ class User
         {
             return $next($request);
         }
+        \Auth::logout();
         return redirect('/login');
     }
 }

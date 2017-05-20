@@ -167,4 +167,21 @@ class AccountRepository extends RepositoryAbstract{
         return \Auth::user();
     }
 
+    public function getUserList(){
+        $cols = array(
+            'id',
+            'email',
+            \DB::raw('CONCAT(f_name, " ", l_name) as full_name'),
+            'role',
+            'status'
+        );
+
+        $users = User::select($cols)
+            //->where('id', '<>', \Auth::id())
+            //->where('role', '<>', User::$role_admin)
+            ->get();
+
+        return $users;
+    }
+
 }

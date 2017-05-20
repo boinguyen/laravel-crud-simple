@@ -19,6 +19,7 @@ class Admin
         {
             return $next($request);
         }
+        \Auth::logout();
         return redirect('/admin/login');
     }
 }
