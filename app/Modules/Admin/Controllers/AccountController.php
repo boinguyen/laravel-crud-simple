@@ -28,6 +28,12 @@ class AccountController extends BaseController implements ResourceInterface{
         $lists = $this->account->getUserList();
 
         return \Datatables::of($lists)
+            ->editColumn('status', function(User $user){
+                return UtilHelper::enumToString($user->status);
+            })
+            ->editColumn('role', function(User $user){
+                return UtilHelper::enumToString($user->role);
+            })
             ->addColumn('actions', 'Admin::account._datatables.actions')
             ->rawColumns(['actions'])
             ->make(true);
@@ -39,7 +45,9 @@ class AccountController extends BaseController implements ResourceInterface{
     }
 
     public function edit($id) {
+        $user = $this->account->find($id);
 
+        return view('Admin::account.edit', compact('user'));
     }
 
     public function show($id) {
@@ -51,7 +59,18 @@ class AccountController extends BaseController implements ResourceInterface{
     }
 
     public function update(Request $request, $id) {
+        $input = $request->all();
 
+        $result = $this->account->update($input, $id);
+
+        UtilHelper::flashSession($result);
+
+        if( $result['success'] ){
+            return redirect('/admin/account');
+        }
+        else{
+            return redirect()->back();
+        }
     }
 
     public function destroy($id) {

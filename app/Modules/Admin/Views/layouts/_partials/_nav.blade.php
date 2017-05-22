@@ -188,13 +188,13 @@
                     <a href="{{ URL::to('admin') }}"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
                 </li>
                 <li>
-                    <a href="{{ URL::to('/admin/user') }}"><i class="fa fa-bar-chart-o fa-fw"></i> User<span class="fa arrow"></span></a>
+                    <a href="{{ URL::to('/admin/account') }}"><i class="fa fa-bar-chart-o fa-fw"></i> User<span class="fa arrow"></span></a>
                     <ul class="nav nav-second-level">
                         <li>
-                            <a href="{{ URL::to('/admin/account') }}">Create</a>
+                            <a href="javascript:;">Create</a>
                         </li>
                         <li>
-                            <a href="{{ URL::to('/admin/account/index') }}">List</a>
+                            <a href="{{ URL::to('/admin/account') }}">List</a>
                         </li>
                     </ul>
                     <!-- /.nav-second-level -->

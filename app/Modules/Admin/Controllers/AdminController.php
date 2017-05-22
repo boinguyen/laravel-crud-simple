@@ -14,6 +14,11 @@ class AdminController extends Controller {
         $this->admin =$admin;
     }
 
+    public function dashboard(){
+        $user = \Auth::user();
+        return view('Admin::dashboard', compact('user'));
+    }
+
     public function login() {
 
         if( \Auth::user() ){
@@ -29,7 +34,7 @@ class AdminController extends Controller {
         $auth = $this->admin->login($input);
 
         if( $auth['success'] ){
-            return redirect('index.php/admin');
+            return redirect('/admin');
         }
         else{
             return redirect('/admin/login');

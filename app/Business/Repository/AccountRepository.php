@@ -84,7 +84,7 @@ class AccountRepository extends RepositoryAbstract{
     }
 
     public function find($id, $columns = array()) {
-
+        return $this->model->find($id);
     }
 
     public function findBy($field, $value, $columns = array()) {
@@ -101,7 +101,7 @@ class AccountRepository extends RepositoryAbstract{
             'message' => 'Update user successfully',
             'data' => null
         );
-        $user = User::find($id);
+        $user = $this->model->find($id);
         $user->f_name = $data['f_name'];
         $user->l_name = $data['l_name'];
 
@@ -112,8 +112,6 @@ class AccountRepository extends RepositoryAbstract{
                 'data' => $user
             );
         }
-
-        UtilHelper::flashSession($result);
 
         return $result;
 
