@@ -2,11 +2,12 @@
 
 namespace App\Modules\Web\Controllers;
 
-use App\Http\Controllers;
+use App\Http\Controllers\BaseController;
 use Illuminate\Http\Request;
 use App\Business\Repository\AccountRepository as AcountRes;
+use App\Business\ResourceInterface;
 
-class AccountController extends Controllers {
+class AccountController extends BaseController implements ResourceInterface {
 
     protected $account;
 
@@ -20,10 +21,9 @@ class AccountController extends Controllers {
      * @return \Illuminate\Http\Response
      */
     public function index() {
-        echo "<pre>";
-        print_r(__FUNCTION__);
-        echo "</pre>";
-        exit;
+        $user = \Auth::user();
+
+        return view('Web::account.dashboard', compact('user'));
     }
 
     function dashboard(){
@@ -54,7 +54,7 @@ class AccountController extends Controllers {
         }
         else{
             return redirect('/register')
-                ->withErrors($result['result'])
+                ->withErrors($result['data'])
                 ->withInput();
         }
     }
@@ -136,35 +136,6 @@ class AccountController extends Controllers {
         $this->account->logout();
 
         return redirect('/');
-    }
-
-    public function profile(){
-        $user = $this->account->profile();
-
-        return view('Web::account.profile', compact('user'));
-    }
-
-    public function profileUpdate(){
-        $user = $this->account->profile();
-
-        return view('Web::account.profile-update', compact('user'));
-    }
-
-    public function profileUpdatePost(Request $request){
-        $input = $request->all();
-        $id = \Auth::user()->id;
-        $result = $this->account->update($input, $id);
-
-        if( $result['success'] ){
-            //: Add flash session
-            return redirect('/account/profile/');
-        }
-        else{
-            echo "<pre>";
-            print_r('fail');
-            echo "</pre>";
-            exit;
-        }
     }
 
 }

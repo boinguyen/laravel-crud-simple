@@ -31,8 +31,11 @@
     <input type="hidden" id="id" name="id" value="{{ $user->id }}" />
 
     <br/>
-    <div class="text-center">
-        <button type="submit" class="btn btn-success">Update</button>
+    <div class="form-group">
+        <label for="" class="col-md-4 control-label"></label>
+        <div class="col-md-8">
+            <button type="submit" class="btn btn-success">Update</button>
+        </div>
     </div>
 
 </form>

@@ -1,4 +1,4 @@
-@extends('Web::layouts.account')
+@extends('Admin::layouts.default')
 @section('title', 'Account | profile')
 
 @section('content')

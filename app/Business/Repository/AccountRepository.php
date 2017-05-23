@@ -22,14 +22,13 @@ class AccountRepository extends RepositoryAbstract{
     }
 
     public function store(array $data) {
-        //$this->model;
         $result = array();
         try {
             $userM = new User();
 
             $data['password'] = $data['password'];
             $data['role'] = $userM::$role_user;
-            $data['status'] = $userM::$status_waiting;
+            $data['status'] = $userM::$status_active;
 
             $valid = $userM->valid($data);
             if( $valid->passes() ){
@@ -185,8 +184,8 @@ class AccountRepository extends RepositoryAbstract{
         );
 
         $users = User::select($cols)
-            //->where('id', '<>', \Auth::id())
-            //->where('role', '<>', User::$role_admin)
+            ->where('id', '<>', \Auth::id())
+            ->where('role', '<>', User::$role_admin)
             ->whereNull('deleted_at')
             ->get();
 
