@@ -32,6 +32,7 @@
             </div>
         </div>
 
+        @include('Web::layouts._partials.modal_processing')
 
         <script src="{{ asset('bootstrap/js/bootstrap.min.js') }}"></script>
         <script src="{{ asset('js/main.js') }}"></script>

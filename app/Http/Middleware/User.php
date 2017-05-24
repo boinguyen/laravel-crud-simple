@@ -4,7 +4,7 @@ namespace App\Http\Middleware;
 
 use Closure;
 
-class Admin
+class User
 {
     /**
      * Handle an incoming request.
@@ -15,11 +15,11 @@ class Admin
      */
     public function handle($request, Closure $next)
     {
-        if ( \Auth::check() && \Auth::user()->isAdmin() )
+        if ( \Auth::check() && \Auth::user()->isUser() )
         {
             return $next($request);
         }
         \Auth::logout();
-        return redirect('/admin/login');
+        return redirect('/login');
     }
 }

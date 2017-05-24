@@ -6,7 +6,7 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
         </button>
-        <a class="navbar-brand" href="/index.php/admin">Administrator</a>
+        <a class="navbar-brand" href="/admin">Administrator</a>
     </div>
     <!-- /.navbar-header -->
 
@@ -188,13 +188,20 @@
                     <a href="{{ URL::to('admin') }}"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
                 </li>
                 <li>
-                    <a href="{{ URL::to('/admin/user') }}"><i class="fa fa-bar-chart-o fa-fw"></i> User<span class="fa arrow"></span></a>
+                    <a href="{{ URL::to('/admin/account') }}"><i class="fa fa-bar-chart-o fa-fw"></i> User<span class="fa arrow"></span></a>
                     <ul class="nav nav-second-level">
                         <li>
+<<<<<<< HEAD
+                            <a href="javascript:;">Create</a>
+                        </li>
+                        <li>
+                            <a href="{{ URL::to('/admin/account') }}">List</a>
+=======
                             <a href="{{ URL::to('/admin/account') }}">Create</a>
                         </li>
                         <li>
                             <a href="{{ URL::to('/admin/account/index') }}">List</a>
+>>>>>>> e688b39... Admin add datatables plugins.
                         </li>
                     </ul>
                     <!-- /.nav-second-level -->

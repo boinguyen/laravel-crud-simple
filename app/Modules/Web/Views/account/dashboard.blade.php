@@ -4,7 +4,7 @@
 @section('content')
 
 <div>
-    Dashboard here!
+    <h2>Welcome {{ $user->f_name.' '.$user->l_name }}!</h2>
 </div>
 
 @endsection

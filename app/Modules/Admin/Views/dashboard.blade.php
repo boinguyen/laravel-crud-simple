@@ -1,11 +1,9 @@
 @extends('Admin::layouts.default')
-@section('title', 'dashboard')
+@section('title', 'Account | profile')
 
 @section('content')
 
-<div>
-    Dashboard here!
-</div>
+<h3>Welcome: {{ $user->f_name }}</h3>
 
 @endsection
 

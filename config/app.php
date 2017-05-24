@@ -179,7 +179,8 @@ return [
         //: modules
         App\Modules\ModulesServiceProvider::class,
         //: Datatables
-        Yajra\Datatables\DatatablesServiceProvider::class
+        Yajra\Datatables\DatatablesServiceProvider::class,
+        App\Business\ViewsServiceProvider::class,
 
     ],
 

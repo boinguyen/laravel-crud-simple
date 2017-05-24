@@ -22,14 +22,13 @@ class AccountRepository extends RepositoryAbstract{
     }
 
     public function store(array $data) {
-        //$this->model;
         $result = array();
         try {
             $userM = new User();
 
             $data['password'] = $data['password'];
             $data['role'] = $userM::$role_user;
-            $data['status'] = $userM::$status_waiting;
+            $data['status'] = $userM::$status_active;
 
             $valid = $userM->valid($data);
             if( $valid->passes() ){
@@ -43,14 +42,14 @@ class AccountRepository extends RepositoryAbstract{
                     $result = array(
                         'success' => true,
                         'message' => 'Register successfully',
-                        'result' => $userM
+                        'data' => $userM
                     );
                 }
                 else{
                     $result = array(
                         'success' => false,
                         'message' => 'Error',
-                        'result' => null
+                        'data' => null
                     );
                 }
             }
@@ -58,7 +57,7 @@ class AccountRepository extends RepositoryAbstract{
                 $result = array(
                     'success' => false,
                     'message' => 'Error',
-                    'result' => $valid
+                    'data' => $valid
                 );
             }
 
@@ -70,11 +69,21 @@ class AccountRepository extends RepositoryAbstract{
     }
 
     public function delete($id) {
+        $user = User::find($id);
+        $user->deleted_at = date('Y-m-d H:i:s');
+        $user->save();
 
+        $data = [
+            'success' => true,
+            'message' => 'Delete user successfully',
+            'data' => $user
+        ];
+
+        return $data;
     }
 
     public function find($id, $columns = array()) {
-
+        return $this->model->find($id);
     }
 
     public function findBy($field, $value, $columns = array()) {
@@ -91,7 +100,7 @@ class AccountRepository extends RepositoryAbstract{
             'message' => 'Update user successfully',
             'data' => null
         );
-        $user = User::find($id);
+        $user = $this->model->find($id);
         $user->f_name = $data['f_name'];
         $user->l_name = $data['l_name'];
 
@@ -102,8 +111,6 @@ class AccountRepository extends RepositoryAbstract{
                 'data' => $user
             );
         }
-
-        UtilHelper::flashSession($result);
 
         return $result;
 
@@ -135,20 +142,19 @@ class AccountRepository extends RepositoryAbstract{
                 $result = array(
                     'success' => true,
                     'message' => 'Login successfully',
-                    'result' => \Auth::user()
+                    'data' => \Auth::user()
                 );
             }
             else{
                 $result = array(
                     'success' => false,
                     'message' => 'Login fail',
-                    'result' => null
+                    'data' => null
                 );
             }
         } catch(Exception $ex) {
             \Log::error($ex->getMessage());
         }
-
 
         return $result;
 
@@ -160,12 +166,30 @@ class AccountRepository extends RepositoryAbstract{
         return array(
             'success' => true,
             'message' => 'Logout successfully!',
-            'result' => null
+            'data' => null
         );
     }
 
     public function profile(){
         return \Auth::user();
+    }
+
+    public function getUserList(){
+        $cols = array(
+            'id',
+            'email',
+            \DB::raw('CONCAT(f_name, " ", l_name) as full_name'),
+            'role',
+            'status'
+        );
+
+        $users = User::select($cols)
+            ->where('id', '<>', \Auth::id())
+            ->where('role', '<>', User::$role_admin)
+            ->whereNull('deleted_at')
+            ->get();
+
+        return $users;
     }
 
 }

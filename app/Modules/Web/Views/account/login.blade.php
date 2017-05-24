@@ -3,7 +3,7 @@
 
 @section('content')
 
-<form method="POST" action="/login">
+<form method="POST" action="/login" id="frmLogin" name="frmLogin" class="frmLogin">
     {{ csrf_field() }}
     <div class="form-group">
         <label for="email">Email address</label>
@@ -26,5 +26,26 @@
 @endsection
 
 @push('scripts')
+
+<script>
+$(document).ready(function(){
+    var _form = $('.frmLogin');
+    _form.validate({
+        rules: {
+            email: {
+                required: true,
+                email: true
+            },
+            password: {
+                required: true,
+                minlength: 3
+            }
+        },
+        submitHandler:function(_form){
+            _form.submit();
+        }
+    });
+});
+</script>
 
 @endpush
