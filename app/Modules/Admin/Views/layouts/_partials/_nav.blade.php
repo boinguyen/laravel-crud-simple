@@ -191,17 +191,10 @@
                     <a href="{{ URL::to('/admin/account') }}"><i class="fa fa-bar-chart-o fa-fw"></i> User<span class="fa arrow"></span></a>
                     <ul class="nav nav-second-level">
                         <li>
-<<<<<<< HEAD
                             <a href="javascript:;">Create</a>
                         </li>
                         <li>
                             <a href="{{ URL::to('/admin/account') }}">List</a>
-=======
-                            <a href="{{ URL::to('/admin/account') }}">Create</a>
-                        </li>
-                        <li>
-                            <a href="{{ URL::to('/admin/account/index') }}">List</a>
->>>>>>> e688b39... Admin add datatables plugins.
                         </li>
                     </ul>
                     <!-- /.nav-second-level -->
