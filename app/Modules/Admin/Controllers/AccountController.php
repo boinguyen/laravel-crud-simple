@@ -21,25 +21,7 @@ class AccountController extends BaseController implements ResourceInterface{
     }
 
     public function index(){
-<<<<<<< HEAD
         return view('Admin::account.index');
-=======
-        return view('Admin::account.lists');
-    }
-
-    public function getList(){
-        $cols = array(
-            'id',
-            'email',
-            'CONCAT(f_name, " ", l_name) as full_name',
-            'role',
-            'status'
-        );
-        $lists = User::all();
-
-        return \Datatables::of($lists)
-            ->make();
->>>>>>> e688b39... Admin add datatables plugins.
     }
 
     public function getList(){
